@@ -7,6 +7,7 @@ const LoginLogic = () => {
     const [values, setValues] = useState({
         txtLoginId: "",
         txtPassword: "",
+        txtCompanyCode:"SPIRAL"
       });
 
     const validateField = (name, value) => {
@@ -41,19 +42,19 @@ const LoginLogic = () => {
     };
 
 
-    const onChange = () => (name, value) => {
-        if (!isLoading) {
+    const updateValues =(name, value) => {
+      console.log(name,value)
           validationFormError[name] = validateField(name, value);
           setValues((values) => ({
             ...values,
             [name]: value,
           }));
-        }
+  
       };
     
   return {
     values,
-    onchange,
+    updateValues,
     handleValidation,
     validateField,
     isLoading,
