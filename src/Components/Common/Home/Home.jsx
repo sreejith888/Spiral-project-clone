@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import Popup from '../../../Framework/Popup/Popup';
-import Header from '../Header/Header'
-
+import "./Home.css";
 const Home = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  useEffect(() => {
-    document.addEventListener("keydown", keyDownHander, false);
-  }, []);
-  const keyDownHander = (e) => {
-    if (e.ctrlKey && e.code === "KeyI") {
-      e.preventDefault();
-      setModalOpen(true);
-    }
+const[modalOpen,setModalOpen]=useState(false);
+  useEffect(()=>{
+    document.addEventListener("keydown",keyHandler,false)
+  },[])
+  const keyHandler=(e)=>{
+    if (e.ctrlKey && e.code === "KeyI"){
+  e.preventDefault()
+  setModalOpen(true)
+}
   }
   return (
     <div>
-      <Header/>
-      {modalOpen && (
-          <Popup
-          setModalOpen={setModalOpen}
-          />
-        )}
+      <div className='header'>
+3S LOGICS
+      </div>
+      {
+        modalOpen && (
+          <Popup setModalOpen={setModalOpen}/>
+        )
+      }
+      {/* <Popup setModalOpen={setModalOpen}/> */}
     </div>
   )
 }

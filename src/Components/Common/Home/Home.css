@@ -1,0 +1,11 @@
+.header{
+    width:100vw;
+    height: 40px;
+    background-color:gray;
+    color: black;
+    margin-top: 0px;
+    display: flex;
+    flex: 1;
+    font-weight: 900;
+    padding-top: 10px;
+}
