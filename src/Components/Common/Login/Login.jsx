@@ -100,7 +100,7 @@ const Login = () => {
           type="text"
           value={values.txtLoginId}
           onChange={(e) => updateValues(e.target.name, e.target.value)}
-          placeholder="Login ID"
+          placeholder="Login Id"
         />
         {validationFormError["txtLoginId"]}
         <input
