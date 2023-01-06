@@ -1,31 +1,43 @@
-.modalMain{
+.modalBackground {
+    width: 100vw;
+    height: 100vh;
+    background-color:#fff;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
-    z-index: 10000;
-}
-.modal_container{
-    width: 450px;
-    height: 600px;
-    border-radius: 10px;
+    z-index: 99999;  
+margin-top: 0px;
+   
+  }
+  
+  .modalContainer {
+    width: 500px;
+    height: 500px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 25px;
     overflow: hidden;
-    box-shadow: 0px 2px 30px gray;
-    border: 1px solid black;
-}
-.modal_input{
+   
+  }
+  
+  .titleCloseBtn {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .titleCloseBtn button {
+    background: linear-gradient(to bottom, #660033 0%, #660033 100%);
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  input{
     border-radius: 10px;
     padding:10px;
     margin:5px
-  }
-  .modal_btn {
-    display: flex;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    justify-content: flex-end;
   }

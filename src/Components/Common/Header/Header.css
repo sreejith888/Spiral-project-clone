@@ -12,6 +12,10 @@
     height: 40px;
     margin-top: 0px;
     background-color: #6F7E95;
+    display:flex;
+    justify-content: end;
+    font-size: 16px;
+    font-weight: 600;
 }
 .clientLogo{
     margin-left:50px;

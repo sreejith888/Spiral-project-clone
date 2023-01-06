@@ -1,61 +1,65 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Popup.css";
-const Popup = (props) => {
+function Popup(props) {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
-  const [searchItem, setSearchItem] = useState("");
+  const [posts, setPosts] = useState([]);
+  const [searchTitle, setSearchTitle] = useState("");
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadPosts = async () => {
       setLoading(true);
       const response = await axios.get(
         "https://jsonplaceholder.typicode.com/users"
       );
-      setData(response.data);
+      setPosts(response.data);
       setLoading(false);
     };
-    fetchData();
+
+    loadPosts();
   }, []);
 
+
   return (
-    <div className="modalMain">
-      <div className="modal_container">
-        <button
-          className="modal_btn"
-          onClick={() => {
-            props.setModalOpen(false);
-          }}
-        >
-          x
-        </button>
+    <div className="modalBackground">
+      <div className="modalContainer">
+        <div className="titleCloseBtn">
+          <button
+            className="titleCloseBtn"
+            onClick={() => {
+              props.setModalOpen(false);
+            }}
+          >
+            x
+          </button>
+        </div>
         <div className="title">
-          <h2>Quick search</h2>
+          <h1>Quick Search</h1>
           <input
-            className="modal_input"
-            type="text"
-            placeholder="search item.."
-            onChange={(e) => setSearchItem(e.target.value)}
-          />
-          {loading ? (
-            <h4>Loading ...</h4>
-          ) : (
-            data
-              .filter((value) => {
-                if (searchItem === "") {
-                  return value;
-                } else if (
-                  value.name.toLowerCase().includes(searchItem.toLowerCase())
-                ) {
-                  return value;
-                }
-              })
-              .map((item) => <h5 key={item.id}>{item.name}</h5>)
-          )}
+        style={{ width: "70%", height: "25px" }}
+        type="text"
+        placeholder="Search..."
+        onChange={(e) => setSearchTitle(e.target.value)}
+      />
+       {loading ? (
+        <h4>Loading ...</h4>
+      ) : (
+        posts
+          .filter((value) => {
+            if (searchTitle === "") {
+              return value;
+            } else if (
+              value.name.toLowerCase().includes(searchTitle.toLowerCase())
+            ) {
+              return value;
+            }
+          })
+          .map((item) => <h5 key={item.id}>{item.name}</h5>)
+      )}
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Popup;
