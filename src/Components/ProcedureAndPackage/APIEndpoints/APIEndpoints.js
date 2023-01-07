@@ -1,4 +1,4 @@
- const APIEndpoints = {
+const  APIEndpoints = {
     ProcedureAndPackage: {
         getServiceCategoryList: "HIMS/CMN/GetHIMSMasterDataBinding",
         getProcedureAndPackageList: "HIMS/CMN/GetBNItem",
@@ -10,3 +10,4 @@
       },
     
 }
+export default APIEndpoints;

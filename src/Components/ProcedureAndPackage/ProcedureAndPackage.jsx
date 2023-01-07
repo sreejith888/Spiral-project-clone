@@ -13,15 +13,15 @@ import { AlertMessage } from '../../Framework/Widgets/SelectStyle/Notification/N
 import { CommonCellTemplate } from '../../API methods/Utilities/CustomDataGridCellTemplate';
 const ProcedureAndPackage = () => {
 
-  // const setAlertMessage = AlertMessage();
-  // const filterControlsRef = useRef([]);
-  // const [confirmAlert, setConfirmAlert] = useState({
-  //   open: false,
-  //   title: "",
-  //   msg: "",
-  //   onConfirm: null,
-  //   button: { confirmText: "", abortText: "" },
-  // });
+  const setAlertMessage = AlertMessage();
+  const filterControlsRef = useRef([]);
+  const [confirmAlert, setConfirmAlert] = useState({
+    open: false,
+    title: "",
+    msg: "",
+    onConfirm: null,
+    button: { confirmText: "", abortText: "" },
+  });
 
 
   const [gridApi, setGridApi] = useState();
@@ -29,7 +29,7 @@ const ProcedureAndPackage = () => {
   const [loadingFilter, setLoadingFilter] = useState(DataMapping.emptyArrayLoadingFilterControls);
   const [selectedFilterValues, setSelectedFilterValues] = useState(DataMapping.emptyArraySelectedFilterControlsValues);
   const [procedurePackageData, setProcedureAndPackageData] = useState([]);
-  const [isLoadingloadingProcedureAndPackageData, setIsLoadingloadingProcedureAndPackageData] = useState(false);
+  const [isLoadingProcedureAndPackageData, setIsLoadingProcedureAndPackageData] = useState(false);
   const [isisloadingupdateProcedureAndPackageStatus, setIsisloadingupdateProcedureAndPackageStatus] = useState(false);
 
   const [addModalOpen,setAddModalOpen] = useState(false);
@@ -40,6 +40,8 @@ const ProcedureAndPackage = () => {
   };
 
  const updateFilterControlsOption=(name,value)=>{
+  debugger
+  console.log(name,value);
   setOptionFilter((values)=>({
     ...values,
     [name]:value
@@ -173,13 +175,16 @@ const getServiceCategoryList = () => {
 
     console.log(formData, "Request Json (getServiceCategoryList)");
 
+    const setAlert =()=>{
+      
+    }
     const request = {
       setDatalist: updateFilterControlsOption,
       setLoad: updateLoadingFilterControls,
       requestData: formData,
       apiPath: APIEndpoints.ProcedureAndPackage.getServiceCategoryList,
-      setAlert: 'setAlertMessage',
-      name: "txtServiceCategory",
+      setAlert: setAlertMessage ,
+      name: "txtServiceCategory" ,
       fun: null,
       message: false,
       direct: false,
@@ -187,8 +192,9 @@ const getServiceCategoryList = () => {
     };
 
     getProcedureAndPackageApiData(request);
+    console.log()
   } catch {
-    // setAlertMessage({ open: true, type: "error", message: `${Constant.ERROR_MSG} 441` });
+    setAlertMessage({ open: true, type: "error", message: `${Constant.ERROR_MSG} 441` });
   }
 };
 
@@ -214,10 +220,10 @@ const getProcedureAndPackageList = () => {
 
     const request = {
       setDatalist: setProcedureAndPackageData,
-      setLoad: isLoadingloadingProcedureAndPackageData,
+      setLoad: isLoadingProcedureAndPackageData,
       requestData: formData,
       apiPath: APIEndpoints.ProcedureAndPackage.getProcedureAndPackageList,
-      setAlert: 'setAlertMessage',
+      setAlert: setAlertMessage,
       name: null,
       fun: null,
       message: false,
@@ -227,7 +233,7 @@ const getProcedureAndPackageList = () => {
 
     getProcedureAndPackageApiData(request);
   } catch {
-    // setAlertMessage({ open: true, type: "error", message: `${Constant.ERROR_MSG} 442` });
+    setAlertMessage({ open: true, type: "error", message: `${Constant.ERROR_MSG} 442` });
   }
 };
 
@@ -270,7 +276,7 @@ const onConfirmupdateProcedureAndPackageStatus = (selectedRowData) => {
       setLoad:setIsisloadingupdateProcedureAndPackageStatus ,
       requestData: formData,
       apiPath: APIEndpoints.ProcedureAndPackage.updateProcedureAndPackageStatus,
-      setAlert: 'setAlertMessage',
+      setAlert: setAlertMessage,
       name: null,
       fun: localUpdate,
       message: true,
@@ -280,7 +286,7 @@ const onConfirmupdateProcedureAndPackageStatus = (selectedRowData) => {
 
     getProcedureAndPackageApiData(request);
   } catch {
-    // setAlertMessage({ open: true, type: "error", message: `${Constant.ERROR_MSG} 443` });
+    setAlertMessage({ open: true, type: "error", message: `${Constant.ERROR_MSG} 443` });
   }
 };
 
@@ -292,38 +298,40 @@ useEffect(() => {
 
 const AddProcedureAndPackageModalProps = {
   modalState: addModalOpen,
-  selectedData: isLoadingloadingProcedureAndPackageData,
+  selectedData: isLoadingProcedureAndPackageData,
   closeModal: closeAddModal,
   setConfirmAlert,
   updateGridDataLocally,
 };
   return (
         <>
+         {addModalOpen ? <AddProcedureAndPackage {...AddProcedureAndPackageModalProps} /> : null}
+         <div className='main_procedure'>
         <PageHeader/>
-        <div className="Biz_Listing_PageStart">
+        <div className="PageStart">
         <PageBar title="Procedure & Package">
           <PageBar.Select
-            // width="240px"
-            // label="Service Category"
-            // name="txtServiceCategory"
-            // options={optionFilterControls["txtServiceCategory"]}
-            // isLoading={loadingFilterControls["txtServiceCategory"]}
-            // getOptionValue={(option) => `${option}`}
-            // getOptionLabel={(option) => `${option.MasterDisplayName}`}
-            // value={selectedFilterValues["txtServiceCategory"]}
-            // onChange={(e) => updateFilterControlsValues("txtServiceCategory", e)}
-            // ref={(el) => (filterControlsRef.current["txtServiceCategory"] = el)}
+            width="240px"
+            label="Service Category"
+            name="txtServiceCategory"
+            options={optionFilter["txtServiceCategory"]}
+            isLoading={loadingFilter["txtServiceCategory"]}
+            getOptionValue={(option) => `${option}`}
+            getOptionLabel={(option) => `${option.MasterDisplayName}`}
+            value={selectedFilterValues["txtServiceCategory"]}
+            onChange={(e) => updateFilterControlsValues("txtServiceCategory", e)}
+            ref={(el) => (filterControlsRef.current["txtServiceCategory"] = el)}
           />
 
           <PageBar.Search
-            // name="txtSearchFilter"
-            // value={selectedFilterValues["txtSearchFilter"]}
-            // onClick={() => getProcedureAndPackageList()}
-            // onChange={(e) => updateFilterControlsValues(e.target.name, e.target.value)}
-            // ref={(el) => (filterControlsRef.current["txtSearchFilter"] = el)}
+            name="txtSearchFilter"
+            value={selectedFilterValues["txtSearchFilter"]}
+            onClick={() => getProcedureAndPackageList()}
+            onChange={(e) => updateFilterControlsValues(e.target.name, e.target.value)}
+            ref={(el) => (filterControlsRef.current["txtSearchFilter"] = el)}
           />
 
-          <PageBar.Button type="button" >
+          <PageBar.Button type="button"  onClick={() => OpenAddModal()}>
             Add
           </PageBar.Button>
         </PageBar>
@@ -337,9 +345,10 @@ const AddProcedureAndPackageModalProps = {
           rowData={procedurePackageData}
           onGridReady={onGridReady}
           updateProcedureAndPackageStatus={updateProcedureAndPackageStatus}
-          isloadingupdateProcedureAndPackageStatus={isisloadingupdateProcedureAndPackageStatus}
+          isloadingupdateProcedureAndPackageStatus={isloadingupdateProcedureAndPackageStatus}
           openEditProcedureAndPackageModal={openEditProcedureAndPackageModal}
         /> */}
+        </div>
         </div>
         </>
 

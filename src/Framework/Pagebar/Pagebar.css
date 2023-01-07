@@ -51,10 +51,10 @@
   }
   
   .DynBiz_PageTitle_SearchBoxBtn {
-    background-image: linear-gradient(var(--Main-Primary-Color), #3d8bda);
+    background-color:  #3d8bda;
     height: 100%;
     font-size: 12px;
-    color: #fff;
+    color: rgb(232, 236, 241);
     align-items: center;
     padding: 0 8px;
     border: none;

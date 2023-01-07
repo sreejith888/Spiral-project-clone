@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-// import Modal from "Framework/Components/Layout/Modal/Modal";
-// import Form from "Framework/Components/Layout/FormGroup/FormGroup";
-// import { AlertMessage } from "Framework/Components/Widgets/Notification/NotificationProvider";
 import * as Constant from "../Resources/Constant";
 import * as DataMapping from "../Resources/MappingData";
-import APIEndpoints from "APIMethods/APIEndpoints/APIEndpoints";
+import APIEndpoints from "../APIEndpoints/APIEndpoints";
 import getProcedureAndPackageApiData from "../Resources/CommonFunction";
 import useDebounce from "../../../API methods/Utilities/Debounce";
+import { AlertMessage } from "../../../Framework/Widgets/SelectStyle/Notification/NotificationProvider";
+import Modal from "../../../Framework/Modal/Modal";
+import Form from "../../../Framework/FormGroup/FormGroup";
+import Button from "../../../Framework/Button/Button";
 
 function AddProcedureAndPackage(props) {
   const { modalState, selectedData, closeModal, setConfirmAlert, updateGridDataLocally } = props;
@@ -383,9 +384,9 @@ function AddProcedureAndPackage(props) {
         }
 
         if (buttonMode === "SaveMore") {
-          setOptionAddForm(DataMapping.emptyArrayOptionAddForm);
-          setLoadingAddForm(DataMapping.emptyArrayLoadingAddForm);
-          setSearchTermAddForm(DataMapping.emptyArraySearchTermAddForm);
+          setOptionAddForm(DataMapping.emptyArrayOptionAddFormControls);
+          setLoadingAddForm(DataMapping.emptyArrayLoadingAddFormControls);
+          setSearchTermAddForm(DataMapping.emptyArraySearchTermAddFormControls);
           setSelectedAddFormValues(DataMapping.emptyArraySelectedAddFormControlsValues);
 
           if (addFormControlsRef.current["txtItemGroup"]) {
@@ -498,7 +499,7 @@ function AddProcedureAndPackage(props) {
   }, []);
 
   return (
-    <Modal varient="bottom" title={`${selectedViewMode} Procedure & Package`} show={closeModal} right={0}>
+    <Modal varient="center" title={`${selectedViewMode} Procedure & Package`} show={closeModal} right={0}>
       <Modal.Body>
         <Form>
           <Form.Group column={2} controlwidth="240px">
@@ -622,7 +623,7 @@ function AddProcedureAndPackage(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button
+      <Button
           type="button"
           varient="secondary"
           onClick={() => addProcedureAndPackage("Save")}
