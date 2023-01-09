@@ -78,7 +78,7 @@ const packageAndProcedureValidation =()=>{
     if(filterControlsRef.current["txtServiceCategory"]){
     filterControlsRef.current["txtServiceCategory"].focus();
   }
-  // setAlertMessage({open: true, type: "warning", message: "Please Select Service Category!"})
+  setAlertMessage({open: true, type: "warning", message: "Please Select Service Category!"})
 return false;
   }
   return true;

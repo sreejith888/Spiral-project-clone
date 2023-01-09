@@ -17,7 +17,7 @@ async function getProcedureAndPackageApiData(request) {
     } else {
       setLoad(false);
     }
-    if (result.responseCode === 'Success') {
+    if (result.responseCode === '1') {
       if (result.responseData && Object.values(result.responseData) && Object.values(result.responseData)[0]) {
         debugger;
         if (name) {
