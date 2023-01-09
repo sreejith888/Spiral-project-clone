@@ -13,9 +13,10 @@
     margin-top: 0px;
     background-color: #6F7E95;
     display:flex;
-    justify-content: end;
+    justify-content: space-around;
     font-size: 16px;
     font-weight: 600;
+    gap: 20px;
 }
 .clientLogo{
     margin-left:50px;
