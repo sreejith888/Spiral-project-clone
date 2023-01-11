@@ -9,6 +9,7 @@ import moment from "moment";
 import PageTitle, { PageButton, PageInput, PageSearch, PageSearchButton, PageSelect } from "../../Framework/PageTitle/PageTitle";
 import CreateInvoice from "./OPDVisit/OPDBilling/CreateInvoice/CreateInvoice";
 import PageHeader from "../Common/Header/PageHeader";
+import DataGrid from "../../Framework/DataGrid/DataGrid";
 
 const OPDVisit = () => {
   const userData = getSessionStorage("user");
@@ -402,6 +403,54 @@ const billingModalProps = {
 
           <PageButton onClick={() => toggleAddVisitPopup("Visit")}>Add Visit</PageButton>
         </PageTitle>
+
+        <DataGrid
+            //   frameworkComponents={{
+            //     actionTemplate: cellTemplate,
+            //     patientAgeTemplate: PatientAgeTemplate,
+            //   }}
+              rowData={opdVisitList}
+              getRowStyle={function (data) {
+                if (data.data.IsNewlyAdded) {
+                  return { background: "#d5a10e" };
+                }
+                return { background: "" };
+              }}
+            //   loader={isLoadingOpdVisitList ? <Loader /> : null}
+              toggleBillingModal={openBillingModal}
+            >
+              <DataGrid.Column field="#" headerName="Action" width={100} pinned="left" />
+              <DataGrid.Column field="#" headerName="Sr No." valueGetter="node.rowIndex + 1" width={75} pinned="left" />
+              <DataGrid.Column
+                field="VisitDate"
+                headerName="Visit Date"
+                width={100}
+                cellRenderer={(node) => {
+                  return dateToCompanyFormat(node.data.VisitDate);
+                }}
+              />
+              <DataGrid.Column field="OPNo" headerName="OP No." width={120} />
+              <DataGrid.Column field="HosMRDNo" headerName="MRD No." width={120} />
+              <DataGrid.Column
+                field=""
+                headerName="Patient Name"
+                width={220}
+                cellRenderer={(node) => {
+                  return node.data.PFirstName + " " + node.data.PLastName;
+                }}
+              />
+              <DataGrid.Column field="Gender" headerName="Gender" width={85} />
+              <DataGrid.Column field="#" headerName="Age" width={100} cellRenderer="patientAgeTemplate" />
+              <DataGrid.Column field="PMobileNo" headerName="Mobile No." width={105} />
+              <DataGrid.Column field="CityName" headerName="City" width={85} />
+              <DataGrid.Column field="isVisitClose" headerName="Status" width={85} />
+              <DataGrid.Column field="PatientVisitNo" headerName="Visit No." width={90} />
+              <DataGrid.Column field="PayerName" headerName="Payer Name" width={320} />
+              <DataGrid.Column field="PayerTypeName" headerName="Payer Type" width={150} />
+              <DataGrid.Column field="CreatedBy" headerName="Created By" width={160} />
+              <DataGrid.Column field="VisitType" headerName="Visit Type" width={100} />
+       
+            </DataGrid>
         </div>
     </>
   )

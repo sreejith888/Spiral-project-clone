@@ -1,5 +1,6 @@
 import APIEndpoints from "../../Components/ProcedureAndPackage/APIEndpoints/APIEndpoints";
-import { ProcedureAndPackageApiCalling } from "../../Components/ProcedureAndPackage/APIEndpoints/ProcedureAndPackageApiCalling";
+import ApiCallingOPD from "./APICallingOPD";
+
 
 export const getHIMSMasterDataBinding = async (action, filterID, filterID1) => {
     const requestData = {
@@ -10,7 +11,7 @@ export const getHIMSMasterDataBinding = async (action, filterID, filterID1) => {
         FilterID6: "#all",
       },
     };
-    const response = await ProcedureAndPackageApiCalling(requestData, APIEndpoints.OPDVisit.GetHIMSMasterDataBinding);
+    const response = await ApiCallingOPD(requestData, APIEndpoints.OPDVisit.GetHIMSMasterDataBinding);
     return response;
   };
   
@@ -24,7 +25,7 @@ export const getHIMSMasterDataBinding = async (action, filterID, filterID1) => {
         searchCriteria: request.searchCriteria ? request.searchCriteria : "",
       },
     };
-    const response = await ProcedureAndPackageApiCalling(requestData, APIEndpoints.OPDVisit.GetMasterDataBinding);
+    const response = await ApiCallingOPD(requestData, APIEndpoints.OPDVisit.GetMasterDataBinding);
     return response;
   };
   
@@ -35,7 +36,7 @@ export const getTotalAppointment = async (formData) => {
         ...formData,
       },
     };
-    const response = await ProcedureAndPackageApiCalling(requestData, APIEndpoints.OPDVisit.GetTotalAppointment);
+    const response = await ApiCallingOPD(requestData, APIEndpoints.OPDVisit.GetTotalAppointment);
     return response;
   };
   
@@ -54,6 +55,6 @@ export const getTotalAppointment = async (formData) => {
         pMobileNo: request.mobileNo ? request.mobileNo : "",
       },
     };
-    const response = await ProcedureAndPackageApiCalling(requestData, APIEndpoints.OPDVisit.GetPatientAppointment);
+    const response = await ApiCallingOPD(requestData, APIEndpoints.OPDVisit.GetPatientAppointment);
     return response;
   };

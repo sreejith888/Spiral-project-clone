@@ -4,8 +4,8 @@ import styled from "styled-components";
 import classNames from 'classnames';
 import { FaTimes } from 'react-icons/fa';
 import Draggable from 'react-draggable';
-import Button from '../Button/Button';
 import Portal from './Portal';
+import Button from '../Button/Button';
 
 export default function Modal(props) {
   const { varient, title, children, draggable, onlymodal, className, index = 0, style, height, show, width, left, right, top, bottom, onlyfooter = false, ...restProps } = props;
